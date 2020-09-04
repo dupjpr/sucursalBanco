@@ -11,13 +11,13 @@ function users(){
 function inicio(){
     console.log("Bienvenido al Banco PCB");
     return prompt("clave");
+    
 }
 
 const pass = inicio();
 
 function password(pass){
     const num = users().some( user => {return user.password == pass;} )
-    // console.log(num);
     return num ? pass : password(prompt("nuevamente"));
 }
 
@@ -29,31 +29,46 @@ function cliente(id){
 }
 
 let cltLog = cliente(id);
+let saldo = cltLog.saldo;
 
 function userAccount(cltLog){
     console.log(`Bienvenido ${cltLog.nombre}`);
     console.log(`Tu número de cuenta es: ${cltLog.accountNumber}`)
-    console.log(`Su saldo es: ${cltLog.saldo}`)
+    console.log(`Su saldo actual es: ${saldo}`)
+    console.log(`¿Qué operación quiere hacer?\nOpción 1 Retiros marque 1.\nOpción 2 Consignaciones marque cualquier tecla.  `)
+    prompt("Opción:") == 1 ? retiro(prompt("Escriba monto a retirar:")) : consignacion(prompt("Escriba monto a consignar:"));
+    console.log("_______________")
 }
 
 userAccount(cltLog);
-
 // Operaciones
 
-let saldo = cltLog.saldo;
 
 
 function retiro(retiro){
-    return saldo -= retiro;
+    return saldo -= parseInt(retiro);
 }
-
-let saldo1 = retiro(100);
 
 function consignacion(monto){
-    return saldo += monto;
+    return saldo += parseInt(monto);
 }
 
-let saldo2 = consignacion(0);
+
+
+function final(){
+    console.log(`${cltLog.nombre} su nuevo saldo es ${saldo}`);
+    console.log("Marque 1 si desea hacer otra operación.")
+    console.log("_______________")
+    if(prompt("opción") == 1){
+        userAccount(cltLog)
+    }
+    final();
+}
+
+
+final();
+
+
 
 
 
