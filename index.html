@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/normalize.css">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&display=swap" re="stylesheet">
 
     <title>Cajero</title>
@@ -13,6 +13,7 @@
     <header>
         <img src="/images/Logo Banco mod.jpg" alt="logo banco">
         <h1>Banco en Linea</h1>
+        <div id="date">fecha</div>
     </header>
     <main>       
         <div class="separador">
@@ -22,14 +23,16 @@
             <div class="pass">
                 <div id="user">
                     <h3>Registro</h3>
-                    
-                    <form action="">
+                    <div id="passBox">
                         <input type="password" name="" id="pass" placeholder="Ingresa tu clave">
                         <p>Recuerda que la clave es un número de 4 dígitos</p>
                         <div class="subBtn">
-                            <input type="submit" value="Continuar">
+                            <input type="submit" id="btn" value="Continuar">
+                            <!-- <button type="submit"  ></button> -->
                         </div>
-                    </form>
+                    </div>
+
+                    
                     <div class="quest">
                         <a href="#">¿Problemas para acceder?</a>
                         <a href="#">¿Olvidaste tu clave?</a>                      
@@ -47,6 +50,6 @@
         <span> © 2020 banco en linea</span>
         <img src="http://drive.google.com/uc?export=view&id=1kZHxdAmlPoDnx8gXrE2WswRwOh6p3XZG" class="logo">
     </footer>
-  
+   <script src="./app.js" type="module"></script>
 </body>
 </html>

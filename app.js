@@ -6,7 +6,8 @@
 //     ]
 // }
 
-// // front del programa
+
+// front del programa
 
 // function inicio(){
 //     console.log("Bienvenido al Banco PCB");
@@ -77,11 +78,49 @@
 // console.log(pantalla.children[1].innerHTML);
 
 
+// variables
 
-document.addEventListener('DOMContentLoaded', () =>{
-    console.log(2);
-})
+function users(){
+    return [
+        { saldo: 5000, accountNumber: 12345678, nombre: "Juan", id: 1018407125, password: 2504 },
+        { saldo: 10000, accountNumber: 12345676, nombre: "Camilo", id: 44445555, password: 1234 },
+        { saldo: 0, accountNumber: 12345679, nombre: "Estefanía", id: 1018443125, password: 2003 }
+    ]
+}
 
+let base = users();
 
+const pass = document.querySelector('#pass');
+const msn = document.querySelector('#passBox p');
+const btn = document.querySelector('#btn');
+const dateHTML = document.querySelector('#date');
 
+// password listener
+
+btn.addEventListener('click', valida);
+
+function valida(){
+    const num = pass.value;
+    base.some( user => {return user.password == num}) ? pagina() : msnf(); 
+}
+
+function pagina(){
+    location.href = "sucursal.html"
+    
+}
+
+function msnf(){
+    msn.textContent = "Clave incorrecta intente nuevamente !!"
+    msn.style.color = 'red';
+}
+
+//  fecha
+
+fecha()
+
+function fecha(){
+    const date = new Date();
+    dateHTML.textContent = date;
+}
+export let pak = "hola pak";
 
