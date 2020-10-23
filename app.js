@@ -105,7 +105,7 @@ function valida(){
 }
 
 function pagina(){
-    location.href = "sucursal.html"
+    location.href = "inside.html"
     
 }
 
@@ -119,8 +119,8 @@ function msnf(){
 fecha()
 
 function fecha(){
-    const date = new Date();
+    const date = new Date().toLocaleString();
     dateHTML.textContent = date;
 }
-export let pak = "hola pak";
+
 
