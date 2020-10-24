@@ -91,30 +91,35 @@ function users(){
 let base = users();
 
 const pass = document.querySelector('#pass');
-const msn = document.querySelector('#passBox p');
+const msn = document.querySelector('.msnPass');
 const btn = document.querySelector('#btn');
 const dateHTML = document.querySelector('#date');
 
 // password listener
 
-btn.addEventListener('click', valida);
+btn.addEventListener('click', registro);
 
-function valida(){
-    const num = pass.value;
-    base.some( user => {return user.password == num}) ? pagina() : msnf(); 
+// ingreso y validación de usuario
+
+function registro(){
+    const password = parseInt(pass.value);
+    base.some( user => {return user.password === password}) ? inside() : msnError(); 
 }
 
-function pagina(){
-    location.href = "inside.html"
-    
+function msnError(){
+    const msnE = "Clave incorrecta intente nuevamente!";
+    msnPassHTML(msnE);
 }
 
-function msnf(){
-    msn.textContent = "Clave incorrecta intente nuevamente !!"
-    msn.style.color = 'red';
+function msnPassHTML(mensaje){
+    msn.textContent = mensaje;
+    setTimeout(() => {
+        msn.textContent = '';
+    }, 3000);
 }
 
-//  fecha
+
+// agrega fecha
 
 fecha()
 
@@ -123,4 +128,10 @@ function fecha(){
     dateHTML.textContent = date;
 }
 
+// ingresa a la sucursal
+
+function inside(){
+    location.href = "inside.html"
+    
+}
 
