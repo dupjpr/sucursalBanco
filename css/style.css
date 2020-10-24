@@ -180,3 +180,25 @@ footer{
     width: 2%;
 }
 
+
+/* sección home */
+
+.home{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 600px;
+    /* background-color: #4dada7; */
+}
+
+.info{
+    width: 50%;
+    height: 100%;
+    /* background-color: blue; */
+}
+
+.tran{
+    width: 50%;
+    height: 100%;
+    /* background-color: red; */
+}

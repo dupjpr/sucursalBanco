@@ -90,6 +90,8 @@ function users(){
 
 let base = users();
 
+const main = document.querySelector('main');
+const landing = document.querySelector('.landing');
 const pass = document.querySelector('#pass');
 const msn = document.querySelector('.msnPass');
 const btn = document.querySelector('#btn');
@@ -103,10 +105,13 @@ btn.addEventListener('click', registro);
 
 function registro(){
     const password = parseInt(pass.value);
-    base.some( user => {return user.password === password}) ? inside() : msnError(); 
-}
-
+    const objeUser = base.findIndex(usuario => usuario.password === password);
+    const usuario = base[objeUser];
+    base.some( usuario => {return usuario.password === password}) ? inside(usuario) : msnError(); 
+};
+ 
 function msnError(){
+    pass.value = '';
     const msnE = "Clave incorrecta intente nuevamente!";
     msnPassHTML(msnE);
 }
@@ -117,7 +122,6 @@ function msnPassHTML(mensaje){
         msn.textContent = '';
     }, 3000);
 }
-
 
 // agrega fecha
 
@@ -130,8 +134,50 @@ function fecha(){
 
 // ingresa a la sucursal
 
-function inside(){
-    location.href = "inside.html"
-    
+function inside(userObj){
+    landing.remove();
+    createHTML(userObj);
 }
 
+function createHTML(usuario){
+    const sec = document.createElement('section');
+    const divInfo = document.createElement('div');
+    const divTran = document.createElement('div');
+    sec.setAttribute('class', 'home');
+    divInfo.setAttribute('class', 'info');
+    divTran.setAttribute('class', 'tran');
+    main.appendChild(sec);
+    sec.appendChild(divInfo);
+    sec.appendChild(divTran);
+    setDivInfo(usuario);
+}
+
+const divTran = document.querySelector('.tran');
+
+function setDivInfo (usuario){
+    const {nombre, accountNumber, saldo} = usuario;
+    createTitulo(nombre);
+    muestraNumCuenta(accountNumber);
+    muestraSaldo(saldo);  
+}
+
+function createTitulo(nombre) {
+    const divInfo = document.querySelector('.info');
+    const titulo = document.createElement('h1');
+    titulo.textContent = `Bienvenido ${nombre}` ;   
+    divInfo.appendChild(titulo);
+}
+
+function muestraNumCuenta(accountNumber){
+    const divInfo = document.querySelector('.info');
+    const cuenta = document.createElement('div');
+    cuenta.textContent = `Número de cuenta: ${accountNumber}` ;   
+    divInfo.appendChild(cuenta);
+}
+
+function muestraSaldo(saldoc){
+    const divInfo = document.querySelector('.info');
+    const saldo = document.createElement('div');
+    saldo.textContent = `Tu saldo es: ${saldo}` ;   
+    divInfo.appendChild(saldo);
+}
