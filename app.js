@@ -97,11 +97,13 @@ const msn = document.querySelector('.msnPass');
 const btn = document.querySelector('#btn');
 const dateHTML = document.querySelector('#date');
 
+
 // password listener
 
 btn.addEventListener('click', registro);
 
 // ingreso y validación de usuario
+
 
 function registro(){
     const password = parseInt(pass.value);
@@ -109,6 +111,7 @@ function registro(){
     const usuario = base[objeUser];
     base.some( usuario => {return usuario.password === password}) ? inside(usuario) : msnError(); 
 } 
+
 
 function msnError(){
     pass.value = '';
@@ -200,27 +203,52 @@ function setDivTran(){
     const nav = document.createElement('nav');
     const opt1 = document.createElement('button');
     const opt2 = document.createElement('button');
+    const contG = document.createElement('div');
     nav.setAttribute('class','navTran');
     opt1.setAttribute('class','opt1');
     opt2.setAttribute('class','opt2');
+    contG.setAttribute('class','contG');
     divTran.appendChild(nav);
+    divTran.appendChild(contG);
     nav.appendChild(opt1);
     nav.appendChild(opt2);
     document.querySelector('.opt1').textContent = 'Consignaciones';
-    document.querySelector('.opt2').textContent = 'Retiros';    
+    document.querySelector('.opt2').textContent = 'Retiros';  
+    
+ 
+    opcion1();
+    opcion2();
 }
 
-const opt1 = document.querySelector('.opt1');
-const opt2 = document.querySelector('.opt2');
-
-opt1.addEventListener('click', consignacion);
-
+function opcion1(){
+    const opt1 = document.querySelector('.opt1');
+    opt1.addEventListener('click', consignacion);
+}
 
 function consignacion(){
-    const divTran = document.querySelector('.tran');
-    const contInput = document.createElement('div');
-    contInput.setAttribute('class','contInput');
-    divTran.appendChild(contInput);
+    const contG = document.querySelector('.contG');
+    limpiarHTML(contG);
+    const contenedor = document.createElement('div');
+    contenedor.setAttribute('class', 'consig');
+    contG.appendChild(contenedor);
+}
+
+function opcion2(){
+    const opt2 = document.querySelector('.opt2');
+    opt2.addEventListener('click', retiro); 
+}
+
+function retiro(){
+    const contG = document.querySelector('.contG');
+    limpiarHTML(contG);
+    const contenedor = document.createElement('div');
+    contenedor.setAttribute('class', 'retiro');
+    contG.appendChild(contenedor); 
+}
 
 
+function limpiarHTML(contG){
+    while (contG.firstChild) {
+        contG.removeChild(contG.firstChild);
+    }
 }
