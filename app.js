@@ -82,9 +82,9 @@
 
 function users(){
     return [
-        { saldo: 5000, accountNumber: 12345678, nombre: "Juan", id: 1018407125, password: 2504 },
-        { saldo: 10000, accountNumber: 12345676, nombre: "Camilo", id: 44445555, password: 1234 },
-        { saldo: 0, accountNumber: 12345679, nombre: "Estefanía", id: 1018443125, password: 2003 }
+        { saldo: 5000, accountNumber: 12345678, nombre: "Juan", sex: 'M', password: 2504 },
+        { saldo: 10000, accountNumber: 12345676, nombre: "Camilo", sex: 'M', password: 1234 },
+        { saldo: 0, accountNumber: 12345679, nombre: "Estefanía", sex: 'F', password: 2003 }
     ]
 }
 
@@ -108,8 +108,8 @@ function registro(){
     const objeUser = base.findIndex(usuario => usuario.password === password);
     const usuario = base[objeUser];
     base.some( usuario => {return usuario.password === password}) ? inside(usuario) : msnError(); 
-};
- 
+} 
+
 function msnError(){
     pass.value = '';
     const msnE = "Clave incorrecta intente nuevamente!";
@@ -150,34 +150,77 @@ function createHTML(usuario){
     sec.appendChild(divInfo);
     sec.appendChild(divTran);
     setDivInfo(usuario);
+    setDivTran();
 }
 
-const divTran = document.querySelector('.tran');
+
+// se configura la sección de información
 
 function setDivInfo (usuario){
-    const {nombre, accountNumber, saldo} = usuario;
-    createTitulo(nombre);
+    const divInfo = document.querySelector('.info');
+    const contenedor = document.createElement('div');
+    contenedor.setAttribute('class','contInfo');
+    divInfo.appendChild(contenedor);
+
+    const {nombre, accountNumber, saldo, sex} = usuario;
+    createTitulo(nombre, sex);
     muestraNumCuenta(accountNumber);
     muestraSaldo(saldo);  
 }
 
-function createTitulo(nombre) {
-    const divInfo = document.querySelector('.info');
+function createTitulo(nombre, sex) {
+    const contenedor = document.querySelector('.contInfo');
     const titulo = document.createElement('h1');
-    titulo.textContent = `Bienvenido ${nombre}` ;   
-    divInfo.appendChild(titulo);
+
+    sex === 'M' ?  titulo.textContent = `Bienvenido ${nombre}`:  titulo.textContent = `Bienvenida ${nombre}`;
+    
+    contenedor.appendChild(titulo);
 }
 
 function muestraNumCuenta(accountNumber){
-    const divInfo = document.querySelector('.info');
+    const contenedor = document.querySelector('.contInfo');
     const cuenta = document.createElement('div');
     cuenta.textContent = `Número de cuenta: ${accountNumber}` ;   
-    divInfo.appendChild(cuenta);
+    contenedor.appendChild(cuenta);
 }
 
 function muestraSaldo(saldoc){
     const divInfo = document.querySelector('.info');
     const saldo = document.createElement('div');
-    saldo.textContent = `Tu saldo es: ${saldo}` ;   
+    saldo.setAttribute('id', 'saldo');
+    saldo.textContent = `Tu saldo es: $${saldoc}` ;   
     divInfo.appendChild(saldo);
+}
+
+
+// se configura la sección de operaciones
+
+function setDivTran(){
+    const divTran = document.querySelector('.tran');
+    const nav = document.createElement('nav');
+    const opt1 = document.createElement('button');
+    const opt2 = document.createElement('button');
+    nav.setAttribute('class','navTran');
+    opt1.setAttribute('class','opt1');
+    opt2.setAttribute('class','opt2');
+    divTran.appendChild(nav);
+    nav.appendChild(opt1);
+    nav.appendChild(opt2);
+    document.querySelector('.opt1').textContent = 'Consignaciones';
+    document.querySelector('.opt2').textContent = 'Retiros';    
+}
+
+const opt1 = document.querySelector('.opt1');
+const opt2 = document.querySelector('.opt2');
+
+opt1.addEventListener('click', consignacion);
+
+
+function consignacion(){
+    const divTran = document.querySelector('.tran');
+    const contInput = document.createElement('div');
+    contInput.setAttribute('class','contInput');
+    divTran.appendChild(contInput);
+
+
 }
