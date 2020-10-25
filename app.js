@@ -214,38 +214,54 @@ function setDivTran(){
     nav.appendChild(opt2);
     document.querySelector('.opt1').textContent = 'Consignaciones';
     document.querySelector('.opt2').textContent = 'Retiros';  
-    
- 
-    opcion1();
-    opcion2();
+
+    opcion();
+    // opcion2();
 }
 
-function opcion1(){
-    const opt1 = document.querySelector('.opt1');
-    opt1.addEventListener('click', consignacion);
+
+function opcion(){
+    const nav = document.querySelector('.navTran');
+    nav.addEventListener('click', selec);
 }
 
-function consignacion(){
+function selec (e) {
+
+    if(e.target.classList.contains('opt1')){
+        // const msn = 'consignando';
+        const obj = {titulo: 'Consignación', mensaje: 'Digite el valor a consignar:'};
+        agregaEspacio(msn, obj);
+    } else if(e.target.classList.contains('opt2')){
+        const obj = {titulo: 'Retiro', mensaje: 'Digite el valor a retirar:'};
+        agregaEspacio(msn, obj);
+    } 
+}
+
+function agregaEspacio(msn, obj){
     const contG = document.querySelector('.contG');
     limpiarHTML(contG);
     const contenedor = document.createElement('div');
-    contenedor.setAttribute('class', 'consig');
+    contenedor.setAttribute('class', 'transac');
     contG.appendChild(contenedor);
+    setTransaccion(obj);
 }
 
-function opcion2(){
-    const opt2 = document.querySelector('.opt2');
-    opt2.addEventListener('click', retiro); 
+function setTransaccion(obj){
+    const {titulo, mensaje} = obj;
+    const contenedor = document.querySelector('.transac');
+    const tituloT = document.createElement('h2');
+        tituloT.textContent = titulo;
+        contenedor.appendChild(tituloT);
+    const divTex = document.createElement('div');
+        divTex.textContent = mensaje;
+        contenedor.appendChild(divTex);
+    const input = document.createElement('input');
+        input.setAttribute('type', 'number');
+        contenedor.appendChild(input);
+    const inputS = document.createElement('input');
+        inputS.setAttribute('type', 'submit');
+        contenedor.appendChild(inputS);
 }
-
-function retiro(){
-    const contG = document.querySelector('.contG');
-    limpiarHTML(contG);
-    const contenedor = document.createElement('div');
-    contenedor.setAttribute('class', 'retiro');
-    contG.appendChild(contenedor); 
-}
-
 
 function limpiarHTML(contG){
     while (contG.firstChild) {
