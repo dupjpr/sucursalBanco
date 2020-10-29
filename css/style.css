@@ -216,23 +216,40 @@ footer{
 .tran{
     width: 50%;
     height: 100%;
-    /* background-color: red; */
 }
 
+.navTran{
+    background-color: var(--main-color);
+    padding: 1.5%;
+    width: 98%;
+    border-radius: 5px;
+    margin: auto;
+    
+}
 .contG{
-    width: 100%;
+    margin: auto;
+    width: 98%;
     height: 60%;
-    /* background-color: or; */
 }
 
 .transac{
-    width: 100%;
-    height: 100%;
-    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: auto;
+    width: 97%;
+    height: 50%;
 }
 
-.retiro{
-    width: 100%;
-    height: 100%;
-    background-color: red;
+#valor{
+    display: inline;
+    width: 20%;
+    margin-left: 3%;
+    
+}
+
+#enviar{
+    margin-left: 47.5%;
+    width: 10%;
+    
 }

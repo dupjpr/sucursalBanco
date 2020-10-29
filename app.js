@@ -112,7 +112,6 @@ function registro(){
     base.some( usuario => {return usuario.password === password}) ? inside(usuario) : msnError(); 
 } 
 
-
 function msnError(){
     pass.value = '';
     const msnE = "Clave incorrecta intente nuevamente!";
@@ -228,16 +227,15 @@ function opcion(){
 function selec (e) {
 
     if(e.target.classList.contains('opt1')){
-        // const msn = 'consignando';
         const obj = {titulo: 'Consignación', mensaje: 'Digite el valor a consignar:'};
-        agregaEspacio(msn, obj);
+        agregaEspacio(obj);
     } else if(e.target.classList.contains('opt2')){
         const obj = {titulo: 'Retiro', mensaje: 'Digite el valor a retirar:'};
-        agregaEspacio(msn, obj);
+        agregaEspacio(obj);
     } 
 }
 
-function agregaEspacio(msn, obj){
+function agregaEspacio(obj){
     const contG = document.querySelector('.contG');
     limpiarHTML(contG);
     const contenedor = document.createElement('div');
@@ -250,16 +248,22 @@ function setTransaccion(obj){
     const {titulo, mensaje} = obj;
     const contenedor = document.querySelector('.transac');
     const tituloT = document.createElement('h2');
-        tituloT.textContent = titulo;
-        contenedor.appendChild(tituloT);
+    tituloT.textContent = titulo;
+    contenedor.appendChild(tituloT);
+    const conteDatos = document.createElement('div');
+        conteDatos.setAttribute('id', 'contD'); 
+        contenedor.appendChild(conteDatos);
+    const inerCon = document.querySelector('#contD');
     const divTex = document.createElement('div');
-        divTex.textContent = mensaje;
+        inerCon.textContent = mensaje;
         contenedor.appendChild(divTex);
     const input = document.createElement('input');
         input.setAttribute('type', 'number');
-        contenedor.appendChild(input);
+        input.setAttribute('id', 'valor');
+        inerCon.appendChild(input);
     const inputS = document.createElement('input');
         inputS.setAttribute('type', 'submit');
+        inputS.setAttribute('id', 'enviar');
         contenedor.appendChild(inputS);
 }
 
@@ -268,3 +272,4 @@ function limpiarHTML(contG){
         contG.removeChild(contG.firstChild);
     }
 }
+
