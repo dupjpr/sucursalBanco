@@ -103,12 +103,13 @@ const dateHTML = document.querySelector('#date');
 btn.addEventListener('click', registro);
 
 // ingreso y validación de usuario
+let usuario;
 
 
 function registro(){
     const password = parseInt(pass.value);
     const objeUser = base.findIndex(usuario => usuario.password === password);
-    const usuario = base[objeUser];
+    usuario = base[objeUser];
     base.some( usuario => {return usuario.password === password}) ? inside(usuario) : msnError(); 
 } 
 
@@ -116,6 +117,7 @@ function msnError(){
     pass.value = '';
     const msnE = "Clave incorrecta intente nuevamente!";
     msnPassHTML(msnE);
+    
 }
 
 function msnPassHTML(mensaje){
@@ -124,6 +126,8 @@ function msnPassHTML(mensaje){
         msn.textContent = '';
     }, 3000);
 }
+
+
 
 // agrega fecha
 
@@ -197,6 +201,9 @@ function muestraSaldo(saldoc){
 
 // se configura la sección de operaciones
 
+
+let subTotal = 0;
+
 function setDivTran(){
     const divTran = document.querySelector('.tran');
     const nav = document.createElement('nav');
@@ -214,8 +221,10 @@ function setDivTran(){
     document.querySelector('.opt1').textContent = 'Consignaciones';
     document.querySelector('.opt2').textContent = 'Retiros';  
 
+    
+    subTotal = usuario.saldo;
+ 
     opcion();
-    // opcion2();
 }
 
 
@@ -224,15 +233,24 @@ function opcion(){
     nav.addEventListener('click', selec);
 }
 
-function selec (e) {
 
+function selec (e) {
+    
     if(e.target.classList.contains('opt1')){
-        const obj = {titulo: 'Consignación', mensaje: 'Digite el valor a consignar:'};
+        const obj = {titulo: 'Consignación', mensaje: 'Digite el valor a consignar:', value: 'Consignar'};
         agregaEspacio(obj);
+        const btnValor = document.getElementById('enviar');
+        btnValor.addEventListener('click', consignacion);
+        return
     } else if(e.target.classList.contains('opt2')){
-        const obj = {titulo: 'Retiro', mensaje: 'Digite el valor a retirar:'};
+        const obj = {titulo: 'Retiro', mensaje: 'Digite el valor a retirar:', value: 'Retirar'};
         agregaEspacio(obj);
+        const btnValor = document.getElementById('enviar');
+        btnValor.addEventListener('click', retiro);
+        return
     } 
+    
+    
 }
 
 function agregaEspacio(obj){
@@ -245,7 +263,7 @@ function agregaEspacio(obj){
 }
 
 function setTransaccion(obj){
-    const {titulo, mensaje} = obj;
+    const {titulo, mensaje, value} = obj;
     const contenedor = document.querySelector('.transac');
     const tituloT = document.createElement('h2');
     tituloT.textContent = titulo;
@@ -264,6 +282,7 @@ function setTransaccion(obj){
     const inputS = document.createElement('input');
         inputS.setAttribute('type', 'submit');
         inputS.setAttribute('id', 'enviar');
+        inputS.setAttribute('value', value);
         contenedor.appendChild(inputS);
 }
 
@@ -273,3 +292,55 @@ function limpiarHTML(contG){
     }
 }
 
+
+// Calculos transacciones
+
+function consignacion(){
+    
+    const monto = document.getElementById('valor').value;
+    const valid = validaMonto(monto);
+
+    if (valid === 'ok'){
+        subTotal = subTotal + parseInt(monto);
+        const newSaldo = document.getElementById('saldo');
+        newSaldo.textContent = `Tu saldo es: $${subTotal}`;
+        document.getElementById('valor').value = '';
+    }
+    
+}
+
+function validaMonto(monto){
+    if (monto === ''){
+        const msn = 'El campo no puede estar vacio';
+        mensajeHTML(msn);
+        return        
+    } else if (monto <= 0){
+        const msn = 'El monto debe ser mayor a cero';
+        mensajeHTML(msn);
+        return
+    } else {
+        const msn = 'Transacción exitosa';
+        mensajeHTML(msn);
+        return 'ok'
+    }
+}
+
+function mensajeHTML(msn){
+    const msnCont = document.createElement('div');
+    const btn = document.querySelector('.transac');
+    msnCont.setAttribute('id','msnC');
+    msnCont.textContent = msn;
+    btn.after(msnCont);
+    setTimeout(() => {
+        document.getElementById('msnC').remove();
+    }, 3000);
+}
+
+function retiro(){
+    const monto = parseInt(document.getElementById('valor').value);
+    // validaMonto(monto);
+    subTotal = subTotal - monto;
+    const newSaldo = document.getElementById('saldo');
+    newSaldo.textContent = `Tu saldo es: $${subTotal}`;
+    document.getElementById('valor').value = '';
+}
