@@ -194,7 +194,8 @@ function muestraSaldo(saldoc){
     const divInfo = document.querySelector('.info');
     const saldo = document.createElement('div');
     saldo.setAttribute('id', 'saldo');
-    saldo.textContent = `Tu saldo es: $${saldoc}` ;   
+    const saldoActual = formatNum(saldoc)
+    saldo.textContent = `Tu saldo es: $${saldoActual}` ;   
     divInfo.appendChild(saldo);
 }
 
@@ -298,31 +299,56 @@ function limpiarHTML(contG){
 function consignacion(){
     
     const monto = document.getElementById('valor').value;
-    const valid = validaMonto(monto);
+    const valid = validaMonto(monto, 'abono');
 
     if (valid === 'ok'){
         subTotal = subTotal + parseInt(monto);
         const newSaldo = document.getElementById('saldo');
-        newSaldo.textContent = `Tu saldo es: $${subTotal}`;
+        const subTotalFormat = formatNum(subTotal)
+        newSaldo.textContent = `Tu saldo es: $${subTotalFormat}`;
         document.getElementById('valor').value = '';
     }
     
 }
 
-function validaMonto(monto){
-    if (monto === ''){
-        const msn = 'El campo no puede estar vacio';
-        mensajeHTML(msn);
-        return        
-    } else if (monto <= 0){
-        const msn = 'El monto debe ser mayor a cero';
-        mensajeHTML(msn);
-        return
-    } else {
-        const msn = 'Transacción exitosa';
-        mensajeHTML(msn);
-        return 'ok'
+function validaMonto(monto, tran){
+
+    if(tran === 'abono'){
+
+        if (monto === ''){
+            const msn = 'El campo no puede estar vacio';
+            mensajeHTML(msn);
+            return        
+        } else if (monto <= 0){
+            const msn = 'El monto debe ser mayor a cero';
+            mensajeHTML(msn);
+            return
+        } else {
+            const msn = 'Transacción exitosa';
+            mensajeHTML(msn);
+            return 'ok'
+        }
+    } else if(tran === 'retiro'){
+
+        if (monto === ''){
+            const msn = 'El campo no puede estar vacio';
+            mensajeHTML(msn);
+            return        
+        } else if (monto <= 0){
+            const msn = 'El monto debe ser mayor a cero';
+            mensajeHTML(msn);
+            return
+        } else if(monto > subTotal){
+            const msn = 'Fondos insuficientes';
+            mensajeHTML(msn);
+            return
+        } else {
+            const msn = 'Transacción exitosa';
+            mensajeHTML(msn);
+            return 'ok'
+        }
     }
+
 }
 
 function mensajeHTML(msn){
@@ -337,10 +363,21 @@ function mensajeHTML(msn){
 }
 
 function retiro(){
-    const monto = parseInt(document.getElementById('valor').value);
-    // validaMonto(monto);
-    subTotal = subTotal - monto;
-    const newSaldo = document.getElementById('saldo');
-    newSaldo.textContent = `Tu saldo es: $${subTotal}`;
-    document.getElementById('valor').value = '';
+    const monto = document.getElementById('valor').value;
+    
+    const valid = validaMonto(monto, 'retiro');
+
+    if (valid === 'ok'){
+        
+        subTotal = subTotal - parseInt(monto);
+        const newSaldo = document.getElementById('saldo');
+        const subTotalFormat = formatNum(subTotal)
+        newSaldo.textContent = `Tu saldo es: $${subTotalFormat}`;
+        document.getElementById('valor').value = '';
+    }
+    
+}
+
+function formatNum(num){
+  return new Intl.NumberFormat().format(num)
 }
