@@ -138,6 +138,7 @@ section{
     border: none;
     padding: 2%;
     color: var(--text-color);
+    border-radius: 3px;
 }
 
 #btn:hover{
@@ -209,8 +210,13 @@ footer{
     padding-right: 4%;
 }
 #saldo{
-    padding-left: 4%;
+    width: 33%;
     margin-top: 10%;
+    margin-left: 4%;
+    background-color: #eeeeee;
+    padding: 2%;
+    border-radius: 3px;
+    border: 1px solid gray;
 }
 
 .tran{
@@ -255,8 +261,17 @@ footer{
     flex-direction: column;
     justify-content: space-evenly;
     margin: auto;
-    width: 97%;
-    height: 70%;
+    margin-top: 2%;
+    width: 100;
+    height: 60%;
+    background-color: #eeeeee;
+    padding: 2%;
+    border-radius: 3px;
+    border: 1px solid gray;
+}
+
+#contD{
+    margin-top: 2%;
 }
 
 #valor{
@@ -267,7 +282,55 @@ footer{
 }
 
 #enviar{
-    margin-left: 47.5%;
-    width: 10%;
-    
+    margin-left: 41%;
+    text-align: center;
+    width: 15%;
+    border: none;
+    background-color: var(--main-color);
+    padding: 1% 0;
+    color: whitesmoke;
+}
+
+
+#enviar:hover{
+    background-color: var(--second-color);
+
+}
+
+.success{
+    background-color: #d4edda;
+    border: 1px solid #cddfd0;
+    width: 33%;
+    margin: auto;
+    text-align: center;
+    padding: 1.3%;
+    border-radius: 5px;
+    color: #254c2f;
+    margin-top: 5%;
+}
+
+.warning{
+    background-color: #fff3cd;
+    border: 1px solid #f8edd1;
+    width: 33%;
+    margin: auto;
+    text-align: center;
+    padding: 1.3%;
+    border-radius: 5px;
+    color: #776428;
+    margin-top: 5%;
+
+}
+
+.danger{
+    background-color: #f7d7da;
+    border: 1px solid #e6cdd0;
+    width: 33%;
+    margin: auto;
+    text-align: center;
+    padding: 1.3%;
+    border-radius: 5px;
+    color: #5c272b;
+    margin-top: 5%;
+
 }
