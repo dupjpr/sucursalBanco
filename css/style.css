@@ -3,8 +3,12 @@
  --second-color: #4dada7;
  --text-color: #f5f5f5;
  font-family: 'Roboto', sans-serif;
+}
 
-
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 /* header section */
@@ -98,36 +102,53 @@ section{
     background-color: var(--second-color);
     color: var(--text-color);
     padding-left: 2%;
-    height: 8%;
+    height: 10%;
     padding-top: 1.8%;
-    
-    
 }
 
 #passBox{
-    margin: 3% 2% 0 2%;
-    height: 45%;
+    width: 90%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: auto;
 }
 
 #pass{
     border: solid 1px #70bdb9;
+    width: 60%;
+    height: 18%;
 }
+
+.msnPass{
+    text-align: left;
+    width: 100%;
+}
+
 .subBtn{
     display: flex;
     width: 100%;
     justify-content: center;
 }
+
 #btn{
     background-color: var(--second-color);
-    /* text-transform: uppercase; */
+    text-transform: uppercase;
     border: none;
     padding: 2%;
     color: var(--text-color);
+    border-radius: 3px;
 }
+
+#btn:hover{
+    background-color: var(--main-color);
+}
+
 .quest{
    justify-content: flex-end;
     width: 100%;
-    height: 45%;
+    height: 40%;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -140,7 +161,6 @@ section{
     margin: 0;
     text-decoration: none;
 }
-
 
 /* footer section */
 
@@ -161,3 +181,156 @@ footer{
     width: 2%;
 }
 
+
+/* sección home */
+
+.home{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 600px;
+    /* background-color: #4dada7; */
+}
+
+.info{
+    width: 50%;
+    height: 100%;
+    border-right: 1px solid black;
+    /* background-color: blue; */
+}
+
+.contInfo{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contInfo div{
+    padding-right: 4%;
+}
+#saldo{
+    width: 33%;
+    margin-top: 10%;
+    margin-left: 4%;
+    background-color: #eeeeee;
+    padding: 2%;
+    border-radius: 3px;
+    border: 1px solid gray;
+}
+
+.tran{
+    width: 50%;
+    height: 100%;
+}
+
+.navTran{
+    background-color: var(--main-color);
+    padding: 0.8%;
+    width: 98%;
+    border-radius: 5px;
+    margin: auto;
+    
+}
+
+.navTran button{
+    padding: 1.3% 0.8%;
+    width: 18%;
+    border: none;
+    border-radius: 3px;
+    background-color: var(--main-color);
+    color: whitesmoke;
+}
+.navTran button:hover{
+    background-color: var(--second-color);
+    
+}
+
+.opt2{
+    margin-left: 2%;
+}
+
+.contG{
+    margin: auto;
+    width: 98%;
+    height: 60%;
+}
+
+.transac{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: auto;
+    margin-top: 2%;
+    width: 100;
+    height: 60%;
+    background-color: #eeeeee;
+    padding: 2%;
+    border-radius: 3px;
+    border: 1px solid gray;
+}
+
+#contD{
+    margin-top: 2%;
+}
+
+#valor{
+    display: inline;
+    width: 20%;
+    margin-left: 3%;
+    
+}
+
+#enviar{
+    margin-left: 41%;
+    text-align: center;
+    width: 15%;
+    border: none;
+    background-color: var(--main-color);
+    padding: 1% 0;
+    color: whitesmoke;
+}
+
+
+#enviar:hover{
+    background-color: var(--second-color);
+
+}
+
+.success{
+    background-color: #d4edda;
+    border: 1px solid #cddfd0;
+    width: 33%;
+    margin: auto;
+    text-align: center;
+    padding: 1.3%;
+    border-radius: 5px;
+    color: #254c2f;
+    margin-top: 5%;
+}
+
+.warning{
+    background-color: #fff3cd;
+    border: 1px solid #f8edd1;
+    width: 33%;
+    margin: auto;
+    text-align: center;
+    padding: 1.3%;
+    border-radius: 5px;
+    color: #776428;
+    margin-top: 5%;
+
+}
+
+.danger{
+    background-color: #f7d7da;
+    border: 1px solid #e6cdd0;
+    width: 33%;
+    margin: auto;
+    text-align: center;
+    padding: 1.3%;
+    border-radius: 5px;
+    color: #5c272b;
+    margin-top: 5%;
+
+}
